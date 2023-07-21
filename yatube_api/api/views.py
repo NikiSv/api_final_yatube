@@ -54,9 +54,9 @@ class FollowViewSet(viewsets.ModelViewSet):
     pagination_class = PageNumberPagination
     filter_backends = (filters.SearchFilter,)
     search_fields = ('user__username', 'following__username')
+    http_method_names = ['get', 'post']
 
     def perform_create(self, serializer):
-        serializer.validated_data.get('following')
         serializer.save(user=self.request.user)
 
     def get_queryset(self):
